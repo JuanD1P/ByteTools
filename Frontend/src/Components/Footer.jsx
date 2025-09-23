@@ -55,7 +55,7 @@ export default function Footer() {
             <li><button type="button" onClick={() => navigate("/Inicio")} className="ma-link">Dashboard</button></li>
             <li><button type="button" onClick={() => navigate("/Registro")} className="ma-link">Crear cuenta</button></li>
             <li><button type="button" onClick={() => navigate("/userlogin")} className="ma-link">Iniciar sesión</button></li>
-            <li><a className="ma-link" href="/TERMINOSYSERVICIOSMIAGRO.pdf" target="_blank" rel="noreferrer">Términos y Condiciones</a></li>
+            <li><a className="ma-link" href="/TERMINOSYSERVICIOS.pdf" target="_blank" rel="noreferrer">Términos y Condiciones</a></li>
           </ul>
         </div>
 
