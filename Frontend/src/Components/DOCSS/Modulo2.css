@@ -1,0 +1,58 @@
+/* Reusa tokens base del proyecto (bt-m1-*) y agrega utilidades para este módulo */
+
+.bt-wifi-section{ padding:22px 14px; display:flex; justify-content:center; }
+.bt-wifi-card{
+  width:min(1200px,96vw); border:1px solid #e8ecf3; background:#fff;
+  border-radius:16px; overflow:hidden; box-shadow:0 10px 26px rgba(17,25,40,.08);
+  display:grid; grid-template-columns:320px 1fr;
+}
+
+.bt-wifi-aside{
+  background:#eaf1ff; border-right:1px solid #e1e8f6; padding:22px 18px;
+  display:flex; flex-direction:column; gap:12px;
+}
+.bt-wifi-badge{ display:inline-block; font-weight:900; font-size:12px; padding:5px 9px; border-radius:999px; background:#fff; border:1px solid rgba(0,0,0,.06); width:max-content; }
+.bt-wifi-title{ margin:0; font-size:22px; line-height:1.2; font-weight:900; color:#15335f; }
+.bt-wifi-desc{ margin:0; color:#1c2b3d; opacity:.95; font-size:14px; }
+.bt-wifi-list{ margin:6px 0 0; padding-left:18px; color:#1c2b3d; font-size:14px; }
+.bt-wifi-list li{ margin:4px 0; }
+
+.bt-wifi-body{ background:#fff; display:flex; flex-direction:column; }
+.bt-wifi-head{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px;
+  padding:14px; border-bottom:1px solid #f0f3f8;
+}
+.bt-wifi-head label{ font-size:13px; font-weight:800; color:#0f172a; display:block; margin-bottom:4px; }
+
+.bt-wifi-content{ padding:16px; display:grid; gap:16px; }
+
+/* Inputs y ayudas (siguen la línea bt-m1-*) */
+.bt-wifi-input{ width:100%; height:42px; border:1px solid #e5e8f0; border-radius:10px; padding:0 10px; font-size:14px; background:#fff; }
+.bt-wifi-input:focus{ outline:none; border-color:#b9c4d6; box-shadow:0 0 0 3px rgba(46,90,167,.12); }
+.bt-wifi-help{ display:block; color:#556070; margin-top:2px; font-size:12px; }
+
+/* KPIs */
+.bt-wifi-kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
+.bt-wifi-kpi{ border:1px solid #e5e8f0; border-radius:12px; padding:10px 12px; background:linear-gradient(180deg,#ffffff,#f8fbff); }
+.bt-wifi-kpi__label{ font-size:12px; color:#556070; font-weight:800; }
+.bt-wifi-kpi__value{ font-size:22px; font-weight:900; color:#15335f; line-height:1.1; letter-spacing:.2px; }
+
+/* Tabla */
+.bt-wifi-table{ width:100%; border-collapse:collapse; }
+.bt-wifi-table tr{ border-bottom:1px dashed #eceff6; }
+.bt-wifi-table th, .bt-wifi-table td{ text-align:left; padding:10px 6px; font-size:14px; }
+.bt-wifi-table th{ color:#556070; font-weight:800; font-size:12px; }
+.bt-wifi-table td:last-child{ text-align:right; font-weight:900; }
+
+/* Gráfico */
+.bt-wifi-chart{ width:100%; height:240px; border:1px solid #eef2f7; border-radius:12px; padding:8px; background:#fff; }
+
+/* Chips */
+.bt-wifi-chip{ display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:10px; background:#eef3ff; color:#24406f; border:1px solid #dbe6ff; font-weight:800; font-size:12px; }
+.bt-wifi-chip code{ font-family:ui-monospace, Menlo, Consolas, monospace; font-weight:900; }
+
+/* Responsive */
+@media (max-width:900px){
+  .bt-wifi-card{ grid-template-columns:1fr; }
+  .bt-wifi-aside{ border-right:none; border-bottom:1px solid rgba(17,25,40,.07); }
+}

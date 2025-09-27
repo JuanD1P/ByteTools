@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroImg from "/Home.png";
 import "./DOCSS/Home.css";
 
 export default function Home(){
+  useEffect(() => {
+    localStorage.removeItem("auth-token");
+    localStorage.removeItem("user-role");
+    window.dispatchEvent(new Event("auth-changed"));
+  }, []);
+
   return (
     <div className="cdhx">
       <div className="cdhx-blob cdhx-blob-a" />
@@ -27,13 +33,12 @@ export default function Home(){
             <li>🧩 Más temas en camino</li>
           </ul>
         </div>
-
         <div className="cdhx-visual">
           <div className="cdhx-visual-glow" />
           <img src={heroImg} alt="Robot asistente" className="cdhx-robot" />
-
         </div>
       </section>
+      <div className="cdhx-bottom-cover" aria-hidden />
     </div>
   );
 }

@@ -35,7 +35,7 @@ export default function Login() {
     localStorage.removeItem("user-role");
   }, []);
 
-  // activa la animación cuando el form se monta
+
   useEffect(() => {
     const el = formRef.current;
     if (!el) return;

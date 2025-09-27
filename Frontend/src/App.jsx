@@ -8,6 +8,8 @@ import Admin from './Components/Admin';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Home from './Components/Home';
+import Conversion1 from './Components/Conversion1';
+import DimensionamientoWifi from './Components/DimensionamientoWifi';
 
 function App() {
     return (
@@ -37,6 +39,19 @@ function App() {
                             <Inicio />
                         </ProtectedRoute>
                     } />
+
+                    <Route path="/modulos/velocidades" element={
+                        <ProtectedRoute allowedRoles={['USER']}>
+                            <Conversion1 />
+                        </ProtectedRoute>
+                    } />
+
+                    <Route path="/modulos/wifi" element={
+                        <ProtectedRoute allowedRoles={['USER']}>
+                            <DimensionamientoWifi />
+                        </ProtectedRoute>
+                    } />
+
 
 
                 </Route>

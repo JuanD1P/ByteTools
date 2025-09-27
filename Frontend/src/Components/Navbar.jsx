@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../ImagenesP/ImagenesLogin/LogoPeque.png";
 import "./DOCSS/Navbar.css";
@@ -6,14 +6,32 @@ import "./DOCSS/Navbar.css";
 export default function Navbar() {
   const navigate = useNavigate();
 
+  const readAuth = useCallback(
+    () => ({
+      isLogged: !!localStorage.getItem("auth-token"),
+      role: localStorage.getItem("user-role") || null,
+    }),
+    []
+  );
 
-  const role = localStorage.getItem("user-role");
-  const isLogged = !!localStorage.getItem("auth-token");
+  const [{ isLogged, role }, setAuth] = useState(readAuth);
+
+  useEffect(() => {
+    const onChange = () => setAuth(readAuth());
+
+    window.addEventListener("auth-changed", onChange);
+    window.addEventListener("storage", onChange);
+    return () => {
+      window.removeEventListener("auth-changed", onChange);
+      window.removeEventListener("storage", onChange);
+    };
+  }, [readAuth]);
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("auth-token");
+    localStorage.removeItem("user-role");
+    window.dispatchEvent(new Event("auth-changed"));
     navigate("/userlogin");
-    window.location.reload();
   };
 
   return (
@@ -44,9 +62,43 @@ export default function Navbar() {
             </button>
           </>
         ) : (
-          <button onClick={handleLogout} className="navbar-btn navbar-btnLogout">
-            Cerrar Sesión
-          </button>
+          <>
+          {role === "USER" && (
+              <button
+                onClick={() => navigate("/Inicio")}
+                className="navbar-btn navbar-btnHome"
+              >
+                Inicio
+              </button>
+              
+            )}
+            {role === "USER" && (
+              <button
+                onClick={() => navigate("/modulos/velocidades")}
+                className="navbar-btn navbar-btnHome"
+              >
+                V. de transmision.
+              </button>
+              
+            )}
+            {role === "USER" && (
+              <button
+                onClick={() => navigate("/modulos/wifi")}
+                className="navbar-btn navbar-btnHome"
+              >
+                Red Wifi
+              </button>
+              
+            )}
+            
+
+            <button
+              onClick={handleLogout}
+              className="navbar-btn navbar-btnLogout"
+            >
+              Cerrar Sesión
+            </button>
+          </>
         )}
       </div>
     </nav>
