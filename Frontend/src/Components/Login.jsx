@@ -192,7 +192,7 @@ export default function Login() {
 
         <div className="left-body">
           <h2 className="login-title">Bienvenido de nuevo</h2>
-          <p className="login-sub">Ingresa tus credenciales.</p>
+          <p className="login-sub">Ingresa tus datos.</p>
 
           <form
             ref={formRef}
