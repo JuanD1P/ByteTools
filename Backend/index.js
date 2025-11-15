@@ -11,7 +11,7 @@ const app = express();
 
 // CORS
 app.use(cors({
-  origin: ["http://localhost:5173"], // tu front
+  origin: ["https://bytetools-8c855.web.app"], // tu front
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
