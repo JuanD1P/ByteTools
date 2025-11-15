@@ -243,12 +243,19 @@ export default function Conversion1(){
   return (
     <div className="bt-m1-root">
       <header className="bt-m1-top">
-        <div className="bt-m1-top__title">
-          <h1>Velocidades de transmisión</h1>
-          <p>Convierte potencia y tasas, y estima tiempos de transferencia.</p>
-        </div>
-        <nav className="bt-m1-tabs"><a href="#potencia">Potencia</a><a href="#tasa">Tasa</a><a href="#tiempo">Tiempo</a></nav>
-      </header>
+  <div className="bt-m1-top__title">
+    <h1>
+      Velocidades de <span>transmisión</span>
+    </h1>
+
+  </div>
+  <nav className="bt-m1-tabs">
+    <a href="#potencia">Potencia</a>
+    <a href="#tasa">Tasa</a>
+    <a href="#tiempo">Tiempo</a>
+  </nav>
+</header>
+
       <main>
         <PowerConverter id="potencia"/>
         <RateConverter id="tasa"/>
