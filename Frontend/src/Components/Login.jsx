@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import logo from "../ImagenesP/ImagenesLogin/ByteTools.png";
 import bgHero from "/ImagenFondos/fondo.png";
@@ -10,7 +9,6 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
-  fetchSignInMethodsForEmail,
   getAdditionalUserInfo,
 } from "firebase/auth";
 import { auth } from "../firebase/client";
@@ -28,18 +26,15 @@ export default function Login() {
   const navigate = useNavigate();
   const formRef = useRef(null);
 
-  axios.defaults.withCredentials = true;
-
   useEffect(() => {
     localStorage.removeItem("auth-token");
     localStorage.removeItem("user-role");
   }, []);
 
-
   useEffect(() => {
     const el = formRef.current;
     if (!el) return;
-    void el.offsetWidth; // fuerza reflow
+    void el.offsetWidth;
     el.classList.add("reveal-in");
   }, []);
 
@@ -75,30 +70,27 @@ export default function Login() {
     }
     try {
       setLoading(true);
+
       const { user } = await signInWithEmailAndPassword(
         auth,
         values.email,
         values.password
       );
+
       const idToken = await user.getIdToken();
       localStorage.setItem("auth-token", idToken);
 
-      const { data } = await axios.post(
-        "https://bytetools-mu.vercel.app//auth/session",
-        { idToken }
-      );
-      if (!data?.ok) throw new Error(data?.error || "Sesión inválida");
+      // Rol por defecto para que el resto de la app tenga algo
+      localStorage.setItem("user-role", "USER");
 
-      localStorage.setItem("user-role", data.rol);
       showToast("Sesión iniciada", {
         variant: "success",
         title: "Bienvenido",
         icon: "✅",
       });
 
-      if (data.rol === "ADMIN") navigate("/Admin");
-      else navigate("/Inicio");
-      window.location.reload();
+      // Redirige directo a la plataforma
+      navigate("/Inicio");
     } catch (err) {
       const msg = firebaseErrorToMessage(err);
       showToast(msg, { variant: "error", title: "No se pudo iniciar sesión" });
@@ -113,15 +105,10 @@ export default function Login() {
       const result = await signInWithPopup(auth, provider);
       const info = getAdditionalUserInfo(result);
       const user = result.user;
+
       const idToken = await user.getIdToken();
       localStorage.setItem("auth-token", idToken);
-
-      const { data } = await axios.post(
-        "https://bytetools-mu.vercel.app//auth/session",
-        { idToken }
-      );
-      if (!data?.ok) throw new Error(data?.error || "Sesión inválida");
-      localStorage.setItem("user-role", data.rol);
+      localStorage.setItem("user-role", "USER");
 
       if (info?.isNewUser) {
         showToast("Registro exitoso con Google", {
@@ -137,9 +124,7 @@ export default function Login() {
         });
       }
 
-      if (data.rol === "ADMIN") navigate("/Admin");
-      else navigate("/Inicio");
-      window.location.reload();
+      navigate("/Inicio");
     } catch (error) {
       const msg = firebaseErrorToMessage(error);
       showToast(msg, { variant: "error", title: "No se pudo continuar" });
@@ -204,7 +189,9 @@ export default function Login() {
               type="email"
               placeholder="Correo"
               value={values.email}
-              onChange={(e) => setValues({ ...values, email: e.target.value })}
+              onChange={(e) =>
+                setValues({ ...values, email: e.target.value })
+              }
             />
             <input
               type="password"
