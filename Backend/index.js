@@ -40,5 +40,5 @@ app.post('/auth/session', async (req, res) => {
 app.use('/api', requireAuth, userRouter);
 
 app.listen(3000, () => {
-  console.log("🚀 Servidor en funcionamiento en http://localhost:3000, https://bytetools-mu.vercel.app/");
+  console.log("🚀 Servidor en funcionamiento en https://bytetools-mu.vercel.app/");
 });

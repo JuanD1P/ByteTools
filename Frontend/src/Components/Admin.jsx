@@ -8,7 +8,7 @@ import "./DOCSS/Admin.css";
 
 // Axios con Bearer automático
 const api = axios.create({
-  baseURL: "http://localhost:3000, https://bytetools-mu.vercel.app/",
+  baseURL: "https://bytetools-mu.vercel.app/",
   withCredentials: true,
 });
 api.interceptors.request.use((config) => {
