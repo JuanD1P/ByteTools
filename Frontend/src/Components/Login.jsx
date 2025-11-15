@@ -84,7 +84,7 @@ export default function Login() {
       localStorage.setItem("auth-token", idToken);
 
       const { data } = await axios.post(
-        "http://localhost:3000/auth/session",
+        "http://localhost:3000, https://bytetools-mu.vercel.app//auth/session",
         { idToken }
       );
       if (!data?.ok) throw new Error(data?.error || "Sesión inválida");
@@ -117,7 +117,7 @@ export default function Login() {
       localStorage.setItem("auth-token", idToken);
 
       const { data } = await axios.post(
-        "http://localhost:3000/auth/session",
+        "http://localhost:3000, https://bytetools-mu.vercel.app//auth/session",
         { idToken }
       );
       if (!data?.ok) throw new Error(data?.error || "Sesión inválida");
