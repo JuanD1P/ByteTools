@@ -270,7 +270,7 @@ export default function Registro() {
       >
         <div className="login-text">
           <h2>Comunicacion de datos.</h2>
-          <p>Proyecto VI Semestre</p>
+          <p>Proyecto Final</p>
         </div>
       </aside>
     </div>

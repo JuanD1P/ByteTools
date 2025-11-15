@@ -176,7 +176,7 @@ export default function Login() {
         </header>
 
         <div className="left-body">
-          <h2 className="login-title">Bienvenido de nuevo</h2>
+          <h2 className="login-title">Inicio de sesion.</h2>
           <p className="login-sub">Ingresa tus datos.</p>
 
           <form
