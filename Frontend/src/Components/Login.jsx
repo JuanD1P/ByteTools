@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import logo from "../ImagenesP/ImagenesLogin/ByteTools.png";
 import bgHero from "/ImagenFondos/fondo.png";
@@ -9,11 +10,11 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
+  fetchSignInMethodsForEmail,
   getAdditionalUserInfo,
 } from "firebase/auth";
 import { auth } from "../firebase/client";
 import ToastStack from "../Components/ToastStack";
-import { api } from "../api/client"; 
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
@@ -82,7 +83,10 @@ export default function Login() {
       const idToken = await user.getIdToken();
       localStorage.setItem("auth-token", idToken);
 
-      const { data } = await api.post("/auth/session", { idToken });;
+      const { data } = await axios.post(
+        "https://bytetools-mu.vercel.app//auth/session",
+        { idToken }
+      );
       if (!data?.ok) throw new Error(data?.error || "Sesión inválida");
 
       localStorage.setItem("user-role", data.rol);
@@ -112,8 +116,10 @@ export default function Login() {
       const idToken = await user.getIdToken();
       localStorage.setItem("auth-token", idToken);
 
-      const { data } = await api.post("/auth/session", { idToken });
-
+      const { data } = await axios.post(
+        "https://bytetools-mu.vercel.app//auth/session",
+        { idToken }
+      );
       if (!data?.ok) throw new Error(data?.error || "Sesión inválida");
       localStorage.setItem("user-role", data.rol);
 
@@ -185,7 +191,7 @@ export default function Login() {
         </header>
 
         <div className="left-body">
-          <h2 className="login-title">Bienvenido a ByteTools</h2>
+          <h2 className="login-title">Bienvenido de nuevo</h2>
           <p className="login-sub">Ingresa tus datos.</p>
 
           <form

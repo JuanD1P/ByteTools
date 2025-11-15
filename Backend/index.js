@@ -11,7 +11,7 @@ const app = express();
 
 // CORS
 app.use(cors({
-  origin: ["https://bytetools-8c855.web.app"], // tu front
+  origin: ["http://localhost:5173, https://bytetools-8c855.web.app"], // tu front
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
@@ -40,5 +40,5 @@ app.post('/auth/session', async (req, res) => {
 app.use('/api', requireAuth, userRouter);
 
 app.listen(3000, () => {
-  console.log("🚀 Servidor en funcionamiento en https://bytetools-mu.vercel.app/");
+  console.log("🚀 Servidor en funcionamiento en http://localhost:3000, https://bytetools-mu.vercel.app/");
 });
