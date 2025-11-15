@@ -1,3 +1,4 @@
+// Inicio.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { auth, db } from "../firebase/client";
@@ -29,6 +30,30 @@ const ALL_MODULES = [
     accentFrom: "#7EE3C2",
     accentTo: "#19A27C",
     features: ["UBH/Capacidad", "Bitrate efectivo", "Cantidad de APs"]
+  },
+  {
+    id: "radioenlace",
+    title: "FM/AM, FSPL y zona de Fresnel",
+    desc:
+      "Diseña enlaces básicos: pérdidas en espacio libre, zonas de Fresnel y parámetros FM/AM.",
+    img: "/radio-enlace.png",
+    path: "/modulos/radioenlace",
+    category: "Radio",
+    accentFrom: "#FDB99B",
+    accentTo: "#FF6C5C",
+    features: ["FSPL", "Zona de Fresnel", "FM/AM"]
+  },
+  {
+    id: "iot",
+    title: "Panel IoT (ESP32 + DHT11 + LDR)",
+    desc:
+      "Monitorea temperatura/humedad, controla LEDs y ve el estado automático por LDR.",
+    img: "/lot.png",
+    path: "/modulos/iot",
+    category: "IoT",
+    accentFrom: "#8AB4FF",
+    accentTo: "#1E88E5",
+    features: ["DHT11", "LEDs 1/2 manual", "LED3 automático por LDR"]
   }
 ];
 
@@ -76,26 +101,45 @@ export default function Inicio() {
       <div className="bt-hub-backdrop" aria-hidden />
 
       <header className="bt-hub-hero">
-        <h1 className="bt-hub-hero-title">
-          Hola, {userName} <span className="bt-hub-hand">👋</span>
-        </h1>
-        <p className="bt-hub-hero-sub">
-          Explora los módulos de comunicación de datos y pon en práctica lo aprendido.
-        </p>
+        <div className="bt-hub-hero-main">
+          <div>
+            <p className="bt-hub-hero-pill">Panel de usuario</p>
+            <h1 className="bt-hub-hero-title">
+              Hola, {userName} <span className="bt-hub-hand">👋</span>
+            </h1>
+            <p className="bt-hub-hero-sub">
+              Explora herramientas de comunicación de datos, radio y redes para practicar lo aprendido.
+            </p>
+          </div>
+          <div className="bt-hub-hero-stats">
+            <div className="bt-hub-stat">
+              <span className="bt-hub-stat-label">Módulos disponibles</span>
+              <span className="bt-hub-stat-value">{ALL_MODULES.length}</span>
+            </div>
+            <div className="bt-hub-stat">
+              <span className="bt-hub-stat-label">Categorías</span>
+              <span className="bt-hub-stat-value">{categories.length - 1}</span>
+            </div>
+          </div>
+        </div>
 
         <div className="bt-hub-toolbar">
           <div className="bt-hub-search">
             <input
               type="text"
               className="bt-hub-input"
-              placeholder="Buscar módulo (ej. Wi-Fi, conversores, APs...)"
+              placeholder="Buscar módulo (ej. Wi-Fi, FSPL, IoT, conversores...)"
               value={q}
               onChange={(e) => setQ(e.target.value)}
               aria-label="Buscar módulos"
             />
           </div>
 
-          <div className="bt-hub-filters" role="radiogroup" aria-label="Filtrar por categoría">
+          <div
+            className="bt-hub-filters"
+            role="radiogroup"
+            aria-label="Filtrar por categoría"
+          >
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -119,7 +163,12 @@ export default function Inicio() {
             style={{ ["--accent-from"]: m.accentFrom, ["--accent-to"]: m.accentTo }}
           >
             <div className="bt-hub-media">
-              <img src={m.img} alt={m.title} className="bt-hub-img" loading="lazy" />
+              <img
+                src={m.img}
+                alt={m.title}
+                className="bt-hub-img"
+                loading="lazy"
+              />
             </div>
 
             <div className="bt-hub-body">
@@ -137,15 +186,24 @@ export default function Inicio() {
                 </ul>
               ) : null}
 
-              <Link to={m.path} className="bt-hub-cta" aria-label={`Usar ${m.title}`}>
-                Usar este módulo <span className="bt-hub-cta-arrow" aria-hidden>→</span>
+              <Link
+                to={m.path}
+                className="bt-hub-cta"
+                aria-label={`Usar ${m.title}`}
+              >
+                Usar este módulo
+                <span className="bt-hub-cta-arrow" aria-hidden>
+                  →
+                </span>
               </Link>
             </div>
           </article>
         ))}
 
         {visibleModules.length === 0 && (
-          <div className="bt-hub-empty">No hay módulos que coincidan con tu búsqueda.</div>
+          <div className="bt-hub-empty">
+            No hay módulos que coincidan con tu búsqueda.
+          </div>
         )}
       </section>
     </main>

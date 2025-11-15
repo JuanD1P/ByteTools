@@ -79,6 +79,8 @@ export default function Navbar() {
               >
                 V. de transmision.
               </button>
+
+              
               
             )}
             {role === "USER" && (
@@ -87,6 +89,25 @@ export default function Navbar() {
                 className="navbar-btn navbar-btnHome"
               >
                 Red Wifi
+              </button>
+              
+            )}
+
+            {role === "USER" && (
+              <button
+                onClick={() => navigate("/modulos/iot")}
+                className="navbar-btn navbar-btnHome"
+              >
+                IoT
+              </button>
+              
+            )}
+            {role === "USER" && (
+              <button
+                onClick={() => navigate("/modulos/radio")}
+                className="navbar-btn navbar-btnHome"
+              >
+                Radio
               </button>
               
             )}

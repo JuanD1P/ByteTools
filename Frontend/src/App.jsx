@@ -7,21 +7,22 @@ import ProtectedRoute from './Components/PrivateRoute';
 import Admin from './Components/Admin';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
-import Home from './Components/Home';
 import Conversion1 from './Components/Conversion1';
 import DimensionamientoWifi from './Components/DimensionamientoWifi';
+import IotPanel from './Components/IotPanel';
+import Radio from './Components/Radio';
 
 function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Navigate to="/Home" />} />
+                <Route path="/" element={<Navigate to="/userlogin" />} />
 
                 <Route path="/userlogin" element={<Login />} />
                 <Route path="/Registro" element={<Registro />} />
 
                 <Route element={<LayoutWithNavbar />}>
-                <Route path="/Home" element={<Home />} />
+                
                 {/* RUTAS PARA EL ADMINISTRADOR */}
 
                     <Route path="/Admin" element={
@@ -40,6 +41,12 @@ function App() {
                         </ProtectedRoute>
                     } />
 
+                    <Route path="/modulos/radio" element={
+                        <ProtectedRoute allowedRoles={['USER']}>
+                            <Radio />
+                        </ProtectedRoute>
+                    } />
+
                     <Route path="/modulos/velocidades" element={
                         <ProtectedRoute allowedRoles={['USER']}>
                             <Conversion1 />
@@ -49,6 +56,11 @@ function App() {
                     <Route path="/modulos/wifi" element={
                         <ProtectedRoute allowedRoles={['USER']}>
                             <DimensionamientoWifi />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/modulos/iot" element={
+                        <ProtectedRoute allowedRoles={['USER']}>
+                            <IotPanel />
                         </ProtectedRoute>
                     } />
 
@@ -76,5 +88,7 @@ function LayoutWithNavbar() {
     </>
   );
 }
+
+
 
 export default App;
